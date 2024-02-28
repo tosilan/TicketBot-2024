@@ -53,11 +53,11 @@ async function closeTicket(interaction, ticketChannel) {
     
                       
       const confirmationEmbed = new EmbedBuilder()
-    .setTitle('🔴 Ticket Closed')
+    .setTitle('🔴 チケットは閉じました')
         .setColor('#ff0000')
-  .setDescription(`**Your ticket has been closed successfully.** \n\n- If you have any further questions, feel free to open a new ticket.`)
+  .setDescription(`**チケットは正常に閉鎖されました。** \n\n- ご不明な点がございましたら、お気軽に新しいチケットを開いてください。`)
         .setImage('https://cdn.discordapp.com/attachments/1209503146485747723/1209507551184556054/2.png?ex=65e72caf&is=65d4b7af&hm=30b0b243fe24521a08f0cc49025bc28ba0bf78be82a1d02013c0c27c190d9ada&')
-    .setFooter({ text: 'Thank You for Using Our Ticket Service!', iconURL:'https://cdn.discordapp.com/attachments/1209503146485747723/1209503206871400458/5620-ticket.png?ex=65e728a4&is=65d4b3a4&hm=93bae44d478db895734ef9dfe86325b453e905c64101a20161075b153b91490d&'})
+    .setFooter({ text: 'チケットサービスをご利用いただきありがとうございます!', iconURL:'https://cdn.discordapp.com/attachments/1209503146485747723/1209503206871400458/5620-ticket.png?ex=65e728a4&is=65d4b3a4&hm=93bae44d478db895734ef9dfe86325b453e905c64101a20161075b153b91490d&'})
      .setTimestamp();
 await ticketOwner.send({ embeds: [confirmationEmbed] });
 
@@ -65,9 +65,9 @@ await ticketOwner.send({ embeds: [confirmationEmbed] });
                     } catch (error) {
                       
                         if (error.code === 10003) {
-                            console.error('Error closing ticket:', error);
+                            console.error('チケットの終了エラー:', error);
                         } else {
-                            console.error('An error occurred while closing the ticket:', error);
+                            console.error('チケットの終了中にエラーが発生しました。', error);
                         }
                     }
 }
@@ -84,7 +84,7 @@ async function createTicket(interaction, ticketChannel) {
   try {
     
     if (!interaction || !interaction.user || !interaction.user.id) {
-      throw new Error('Interaction object or user property is undefined or does not contain id.');
+      throw new Error('インタラクションオブジェクトまたはユーザープロパティは未定義であるか、IDが含まれていません。');
     }
     
         const currentTimestamp = Date.now();
@@ -92,7 +92,7 @@ async function createTicket(interaction, ticketChannel) {
         
         if (currentTimestamp - lastTicketCreationTimestamp < 10000) { 
           const remainingTime = Math.ceil((10000 - (currentTimestamp - lastTicketCreationTimestamp)) / 1000);
-          return await interaction.reply({ content: `Please wait ${remainingTime} seconds before creating a new ticket.`, ephemeral: true });
+          return await interaction.reply({ content: `新しいチケットを作成する前に ${remainingTime} 秒待ってください。`, ephemeral: true });
         }
 
      
@@ -140,28 +140,28 @@ async function createTicket(interaction, ticketChannel) {
     
 
     const newChannelName = `ticket-${ticketNumber}`;
-    await tempChannel.setName(newChannelName, 'Updating channel name to include ticket number');
+    await tempChannel.setName(newChannelName, 'チケット番号を含むようにチャンネル名を更新する');
 
     const embedMessage = new EmbedBuilder()
       .setColor('#0099ff')
-      .setTitle('Ticket Details')
-     .setDescription(`📩 **Ticket opened by ${interaction.user}**\n▶️ **Ticket Number: ${ticketNumber}**\n\n\- Please provide a detailed description of your issue or request below.\n- Our support team will assist you as soon as possible.`)
-    .setFooter({ text: 'Your satisfaction is our priority ', iconURL: 'https://cdn.discordapp.com/attachments/1209503146485747723/1209503207177457714/6280-2.gif?ex=65e728a4&is=65d4b3a4&hm=518c747e5e4fb9306c746b1588dd220fe185c7083254731d1c904f8042ad9f61&' });
+      .setTitle('チケットの詳細')
+     .setDescription(`📩 **チケットは ${interaction.user} **\n▶️ **チケット番号： ${ticketNumber} **\n\n\-以下に問題またはリクエストの詳細な説明を提供してください。\n-当社のサポートチームができるだけ早くお手伝いします。`)
+    .setFooter({ text: 'あなたの満足は私たちの優先事項です ', iconURL: 'https://cdn.discordapp.com/attachments/1209503146485747723/1209503207177457714/6280-2.gif?ex=65e728a4&is=65d4b3a4&hm=518c747e5e4fb9306c746b1588dd220fe185c7083254731d1c904f8042ad9f61&' });
     const createTicketButton = new ButtonBuilder()
       .setCustomId('close_ticket')
-      .setLabel('🔒 Close Ticket')
+      .setLabel('🔒 チケットを閉じる')
       .setStyle(ButtonStyle.Danger);
 
     await tempChannel.send({ embeds: [embedMessage], components: [new ActionRowBuilder().addComponents(createTicketButton)] });
-      await interaction.reply({ content: 'Ticket created successfully.', ephemeral: true });
+      await interaction.reply({ content: 'チケットが正常に作成されました。', ephemeral: true });
     
     const ticketOwner = interaction.user;
      const confirmationEmbed = new EmbedBuilder()
-        .setTitle('✅ Ticket Opened')
+        .setTitle('✅ チケットがオープンしました')
             .setColor('#2bff00')
-      .setDescription(` **Your ticket number is ${ticketNumber} ** \n\n-  Our team will assist you shortly. Please hang tight!\n- Feel free to mention Support team for any urgent assistance.`)
+      .setDescription(` **チケット番号は ${ticketNumber} ** \n\n- 私たちのチームがまもなくお手伝いします。お待ちください!\N- 緊急の支援については、サポートチームに遠慮なく言及してください。`)
        .setImage('https://cdn.discordapp.com/attachments/1209503146485747723/1209507551683805204/1.png?ex=65e72caf&is=65d4b7af&hm=3eb4ab1565f7818bf94cdc37343be288cd7ae1792197374ee8d43a82d18cd526&')
-    .setFooter({ text: 'Your satisfaction is our priority! ', iconURl:'https://cdn.discordapp.com/attachments/1209503146485747723/1209503207685103677/8917-blurple-ticket.png?ex=65e728a4&is=65d4b3a4&hm=dc0e876211f155590f3d35e543f9d205acee0df356c7d13b07ad675051bc82bf&'})
+    .setFooter({ text: 'あなたの満足は私たちの優先事項です! ', iconURl:'https://cdn.discordapp.com/attachments/1209503146485747723/1209503207685103677/8917-blurple-ticket.png?ex=65e728a4&is=65d4b3a4&hm=dc0e876211f155590f3d35e543f9d205acee0df356c7d13b07ad675051bc82bf&'})
      .setTimestamp();
     await ticketOwner.send({ embeds: [confirmationEmbed] });
     
@@ -180,7 +180,7 @@ async function createTicket(interaction, ticketChannel) {
 
   } catch (error) {
    
-    await interaction.reply({ content: 'An error occurred while creating the ticket.', ephemeral: true });
+    await interaction.reply({ content: 'チケットの作成中にエラーが発生しました。', ephemeral: true });
   }
 }
 
@@ -197,17 +197,17 @@ process.on('unhandledRejection', (error) => {
 });
 module.exports = {
   name: "setup",
-  description: "Set up the ticket system for your server.",
+  description: "サーバーのチケットシステムを設定します。",
   options: [{
     name: 'channel',
-    description: 'Select the channel where you want to set up the ticket system.',
+    description: 'チケットシステムを設定するチャンネルを選択してください。',
     type: ApplicationCommandOptionType.Channel,
     required: true
   }],
   run: async (client, interaction) => {
     try {
       if (!interaction.member.permissions.has('ADMINISTRATOR')) {
-        return interaction.reply({ content: 'You need to be a server administrator to set up tickets.', ephemeral: true });
+        return interaction.reply({ content: 'チケットを設定するには、サーバー管理者である必要があります。', ephemeral: true });
       }
 
       const ticketChannel = interaction.options.getChannel('channel');
@@ -216,7 +216,7 @@ module.exports = {
       const serverName = interaction.guild.name;
       const setupData = JSON.parse(fs.readFileSync(config.setupFilePath, 'utf8'));
       if (setupData[serverId]) {
-        return interaction.reply({ content: 'Ticket system is already set up in this server.', ephemeral: true });
+        return interaction.reply({ content: 'チケットシステムはすでにこのサーバーに設定されています。', ephemeral: true });
       }
 
       setupData[serverId] = {
@@ -227,13 +227,13 @@ module.exports = {
 
       const embed = new EmbedBuilder()
         .setColor('#0099ff')
-        .setTitle('Ticket System Setup')
-        .setDescription(`Click the button below to set up the ticket system in ${ticketChannel || 'the selected channel'}.`)
-        .setFooter({ text: 'Make sure you choose correct channel!' });
+        .setTitle('チケットシステムのセットアップ')
+        .setDescription(`下のボタンをクリックして、${ticketChannel || '選択したチャンネルでチケットシステムを設定します。'}.`)
+        .setFooter({ text: '正しいチャンネルを選択してください!' });
 
       const button = new ButtonBuilder()
         .setCustomId('setup_ticket')
-        .setLabel('🛠️ Set up Ticket System')
+        .setLabel('🛠️ チケットシステムを設定する')
         .setStyle(ButtonStyle.Primary);
 
       const message = await interaction.reply({ embeds: [embed], components: [new ActionRowBuilder().addComponents(button)], ephemeral: true });
@@ -246,38 +246,39 @@ module.exports = {
             const ticketChannelId = setupData[serverId]?.ticketChannelId;
 
             if (!ticketChannelId) {
-              return interaction.reply({ content: 'Ticket system setup is incomplete. Please run the setup command again.', ephemeral: true });
+              return interaction.reply({ content: 'チケットシステムのセットアップは不完全です。セットアップコマンドをもう一度実行してください。', ephemeral: true });
             }
 
             const ticketChannel = await client.channels.fetch(ticketChannelId);
             if (ticketChannel) {
               const fixedTicketEmbed = new EmbedBuilder()
                 .setColor('#0099ff')
-                .setTitle('🎟️ Welcome to Ticket Support')
+                .setTitle('🎟️ チケットサポートへようこそ')
                 .setImage('https://cdn.discordapp.com/attachments/1004341381784944703/1165201249331855380/RainbowLine.gif')
-              .setDescription('Thank you for choosing our ticket system for support. Please click the button below to create a new ticket.\n\n' +
-                 '**Ticket Guidelines:**\n' +
-                 '- Empty tickets are not permitted.\n' +
-                 '- Please be patient while waiting for a response from our support team.')
-              .setFooter({ text: 'We are here to Help!', iconURL:'https://cdn.discordapp.com/attachments/1209499496732692580/1209514764531924992/1667-yellow-gears.gif?ex=65e73367&is=65d4be67&hm=10e9c542cab73102272ecb710cb58f11e581d7c6e9bf7d7c9da6217cda3928b9&'});
+              .setDescription('サポートのためにチケットシステムをお選びいただきありがとうございます。下のボタンをクリックして、新しいチケットを作成してください。\n\n' +
+
+'**チケットガイドライン:**\n' +
+                 '- 空のチケットは許可されていません。\n' +
+                 '- サポートチームからの回答をお待ちください。')
+              .setFooter({ text: '私たちは助けるためにここにいます!', iconURL:'https://cdn.discordapp.com/attachments/1209499496732692580/1209514764531924992/1667-yellow-gears.gif?ex=65e73367&is=65d4be67&hm=10e9c542cab73102272ecb710cb58f11e581d7c6e9bf7d7c9da6217cda3928b9&'});
 
               const createTicketButton = new ButtonBuilder()
                 .setCustomId('create_ticket')
-                .setLabel('📩 Create a Ticket')
+                .setLabel('📩チケットを作成する')
                 .setStyle(ButtonStyle.Primary);
 
               await ticketChannel.send({ embeds: [fixedTicketEmbed], components: [new ActionRowBuilder().addComponents(createTicketButton)] });
              
-              await interaction.reply({ content: 'Setup successful. ', ephemeral: true });
+              await interaction.reply({ content: 'セットアップに成功しました。', ephemeral: true });
             
               
             } else {
-              console.error('Unable to fetch ticket channel.');
-              return interaction.reply({ content: 'Unable to fetch ticket channel.', ephemeral: true });
+              console.error('チケットチャンネルを取得できません。');
+              return interaction.reply({ content: 'チケットチャンネルを取得できません。', ephemeral: true });
             }
           } catch (error) {
-            console.error('Error setting up tickets:', error);
-            await interaction.reply({ content: 'An error occurred while setting up tickets.', ephemeral: true });
+            console.error('チケットの設定エラー:', error);
+            await interaction.reply({ content: 'チケットの設定中にエラーが発生しました。', ephemeral: true });
           }
         }
       });
@@ -285,7 +286,7 @@ module.exports = {
      
       client.on('interactionCreate', async (interaction) => {
         if (interaction.isButton() && interaction.customId === 'create_ticket') {
-          console.log('Ticket Created');
+          console.log('チケット作成');
         
         }
       });
@@ -293,15 +294,15 @@ module.exports = {
      
       client.on('interactionCreate', async (interaction) => {
         if (interaction.isButton() && interaction.customId === 'close_ticket') {
-          console.log('Ticket Closed');
+          console.log('チケットは締め切りました');
         }
       });
 
   
 
     } catch (error) {
-      console.error('Error setting up tickets:', error);
-      await interaction.reply({ content: 'An error occurred while setting up tickets.', ephemeral: true });
+      console.error('チケットの設定エラー:', error);
+      await interaction.reply({ content: 'チケットの設定中にエラーが発生しました。', ephemeral: true });
     }
   },
   closeTicket,
