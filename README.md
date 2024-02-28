@@ -1,35 +1,44 @@
 
-## Commands
+## コマンド
 
-- `/setup`: Initiates the process of creating a support ticket system.
-- `/reset`: to reset the setup for the server.
+- `/setup`: サポートチケットシステムを作成するプロセスを開始します。
 
-## Ticket Creation Process
+- `/reset`: サーバーのセットアップをリセットします。
 
-1. **Initiate Ticket**: Start by clicking create ticket button
-2. **Ticket Channel Creation**: The bot will create a dedicated channel for the support ticket.
-3. **Communication**: Users can communicate with support staff in the dedicated ticket channel.
-4. **Closing Ticket**: Click the close button to close the channel and ticket!
+## チケット作成プロセス
 
-## Contributing
+1.**チケットの開始**：チケットの作成ボタンをクリックして開始します
 
-Contributions to this project are welcome! If you'd like to contribute, follow these steps:
+2.**チケットチャンネルの作成**: ボットはサポートチケットの専用チャンネルを作成します。
 
-1. **Join Our Discord**: Join our Discord server to connect with the community.
-2. **Show Your Work**: Share your contributions with the community.
-3. **Bug Fixes**: If you encounter any bugs or errors, please notify them.
-4. **Commit Changes**: Commit your changes to your forked repository.
-5. **Pull Request**: Submit a pull request with your changes.
+3.**コミュニケーション**：ユーザーは専用チケットチャンネルでサポートスタッフと通信できます。
 
-Contact me on Discord for any queries or contributions.
+4.**終了チケット**: 閉じるボタンをクリックしてチャンネルとチケットを閉じます!
 
-## Copyright
+## 貢献
 
-All code in this project is authored by RTX. Please do not use this code for any public usage, such as creating YouTube videos, Git repositories, etc., without my explicit permission.
+このプロジェクトへの貢献は大歓迎です!貢献したい場合は、以下の手順に従ってください。
 
-## Contact
+1.**Discordに参加する**：Discordサーバーに参加して、コミュニティとつながりましょう。
 
-If you need any assistance or have questions, feel free to contact me on Discord.
+2.**あなたの仕事を見せる**:あなたの貢献をコミュニティと共有してください。
 
-- **Discord Server**: [Join our Discord server](https://discord.gg/c4kaW2sSbm)
-- **YouTube**: [RTX's YouTube Channel](https://www.youtube.com/channel/UCPbAvYWBgnYhliJa1BIrv0A)
+3.**バグ修正**: バグやエラーが発生した場合は、通知してください。
+
+4.**コミット変更**: 変更をフォークされたリポジトリにコミットします。
+
+5.**プルリクエスト**: 変更を加えたプルリクエストを送信します。
+
+ご質問やご不明な点がございましたら、Discordでご連絡ください。
+
+## 著作権
+
+このプロジェクトのすべてのコードはRTXによって作成されています。私の明示的な許可なしに、YouTubeビデオやGitリポジトリの作成など、このコードを一般に使用しないでください。
+
+## 連絡先
+
+サポートが必要な場合や質問がある場合は、Discordでお気軽にお問い合わせください。
+
+- **Discordサーバー**: [Discordサーバーに参加する](https://discord.gg/c4kaW2sSbm)
+
+- **YouTube**: [RTXのYouTubeチャンネル](https://www.youtube.com/channel/UCPbAvYWBgnYhliJa1BIrv0A)
