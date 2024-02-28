@@ -22,11 +22,11 @@ const config = require('../config.js');
 
 module.exports = {
   name: "reset",
-  description: "Reset the ticket system setup for this server.",
+  description: "このサーバーのチケットシステムのセットアップをリセットします。",
   run: async (client, interaction) => {
     try {
        if (!interaction.member.permissions.has('ADMINISTRATOR')) {
-        return interaction.reply({ content: 'You need to be a server administrator to set up tickets.', ephemeral: true });
+        return interaction.reply({ content: 'チケットを設定するには、サーバー管理者である必要があります。', ephemeral: true });
       }
      
       const serverId = interaction.guildId;
@@ -37,13 +37,13 @@ module.exports = {
         delete setupData[serverId];
         fs.writeFileSync(config.setupFilePath, JSON.stringify(setupData, null, 2));
 
-        return interaction.reply({ content: 'Ticket system setup reset successfully.', ephemeral: true });
+        return interaction.reply({ content: 'チケットシステムのセットアップが正常にリセットされました。', ephemeral: true });
       } else {
-        return interaction.reply({ content: 'No ticket system setup found for this server.', ephemeral: true });
+        return interaction.reply({ content: 'このサーバーのチケットシステムのセットアップが見つかりませんでした。', ephemeral: true });
       }
     } catch (error) {
-      console.error('Error resetting ticket system setup');
-      await interaction.reply({ content: 'Reset Failed! Check Your Permissions.', ephemeral: true });
+      console.error('チケットシステム設定のリセットエラー');
+      await interaction.reply({ content: 'リセットに失敗しました!許可を確認してください。', ephemeral: true });
     }
   },
 };
