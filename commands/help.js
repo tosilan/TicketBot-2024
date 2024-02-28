@@ -28,12 +28,12 @@ module.exports = {
 
       const embed = new EmbedBuilder()
          .setColor('#0099ff')
-      .setTitle('🎫 Ticket Bot Help')
-      .setDescription('Welcome to the Ticket Bot!\n\n- Here are the available commands:\n\n' +
-        '**/setup :** Set up the ticket system for your server.\n' +
-        '**/reset :** Clear the setup done to server.\n' +
-        '**/ping :** check bot latencey.\n' +
-        '**/support :** Display support server info');
+      .setTitle('🎫 チケットボットヘルプ')
+      .setDescription('チケットボットへようこそ!\n\n- 利用可能なコマンドは次のとおりです。\n\n' +
+        '**/setup :** サーバーのチケットシステムを設定します。\n' +
+        '**/reset :** サーバーに行われたセットアップをクリアします。\n' +
+        '**/ping :** ボットのラテンシーをチェックしてください。\n' +
+        '**/support :** サポートサーバー情報を表示する');
 
       return interaction.reply({ embeds: [embed] });
     } catch (e) {
